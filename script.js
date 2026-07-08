@@ -45,41 +45,59 @@ $(document).ready(function () {
     }, 800);
   }
 
-  function close() {
-    envelope.addClass("close").removeClass("open");
-    document.body.classList.remove("opening");
+  function explodeEnvelope(){
 
-    const music = document.getElementById("autoplay");
-    music.pause();
-    music.currentTime = 0;
+    const rect=document.getElementById("envelope").getBoundingClientRect();
 
-    title.textContent = "";
-  }
-  const glow = document.querySelector(".cursor-glow");
+    for(let i=0;i<180;i++){
 
-document.addEventListener("mousemove", (e) => {
+        const p=document.createElement("div");
 
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
+        p.className="fragment";
 
-});
-for(let i=0;i<80;i++){
+        p.style.left=(rect.left+rect.width/2)+"px";
+        p.style.top=(rect.top+rect.height/2)+"px";
 
-let star=document.createElement("div");
+        p.style.setProperty("--x",(Math.random()-0.5)*900+"px");
+        p.style.setProperty("--y",(Math.random()-0.5)*900+"px");
 
-star.className="particle";
+        document.body.appendChild(p);
 
-star.style.left="50%";
+        setTimeout(()=>{
 
-star.style.top="50%";
+            p.remove();
 
-star.style.setProperty("--x",(Math.random()-0.5)*800+"px");
+        },1000);
 
-star.style.setProperty("--y",(Math.random()-0.5)*800+"px");
+    }
 
-document.body.appendChild(star);
+}
 
-setTimeout(()=>star.remove(),2000);
+  function close(){
+
+    explodeEnvelope();
+
+    if(navigator.vibrate){
+        navigator.vibrate([80,40,80]);
+    }
+
+    $("#envelope").css("visibility","hidden");
+
+    setTimeout(()=>{
+
+        $("#envelope").css("visibility","visible");
+
+        envelope.addClass("close").removeClass("open");
+
+        document.body.classList.remove("opening");
+
+        const music=document.getElementById("autoplay");
+        music.pause();
+        music.currentTime=0;
+
+        title.textContent="";
+
+    },900);
 
 }
 });
