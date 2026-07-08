@@ -911,3 +911,127 @@ translateY(-12px);
     }
 
 }
+
+/* ===========================
+   MOBILE ADAPTIVE
+=========================== */
+
+html, body{
+    width:100%;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.envlope-wrapper{
+    width:100%;
+    max-width:420px;
+    height:auto;
+    position:relative;
+}
+
+#envelope{
+    width:min(90vw, 280px);
+    height:calc(min(90vw, 280px) * 0.64);
+    top:0;
+}
+
+/* автоматичне масштабування трикутників конверта */
+.flap{
+    border-left:calc(min(90vw, 280px) / 2) solid transparent;
+    border-right:calc(min(90vw, 280px) / 2) solid transparent;
+    border-bottom:calc(min(90vw, 280px) * 0.29) solid transparent;
+    border-top:calc(min(90vw, 280px) * 0.35) solid #1e3a5f;
+}
+
+.pocket{
+    border-left:calc(min(90vw, 280px) / 2) solid #294a73;
+    border-right:calc(min(90vw, 280px) / 2) solid #294a73;
+    border-bottom:calc(min(90vw, 280px) * 0.32) solid #3d6ea8;
+    border-top:calc(min(90vw, 280px) * 0.32) solid transparent;
+}
+
+.letter{
+    width:92%;
+    height:85%;
+}
+
+.reset{
+    margin-top:20px;
+}
+
+.reset button{
+    width:140px;
+    max-width:42vw;
+}
+
+@media (max-width:768px){
+
+    .letter-content h3{
+        font-size:1rem;
+    }
+
+    .letter-content p{
+        font-size:0.75rem;
+        line-height:1.4;
+    }
+
+    .code-header{
+        font-size:10px;
+    }
+
+    .envelope-label,
+    .flap::after{
+        font-size:11px;
+    }
+
+    .open .letter{
+        transform:
+            translateY(-90px)
+            scale(1.02);
+    }
+}
+
+@media (max-width:480px){
+
+    #envelope{
+        width:92vw;
+        height:58vw;
+        max-width:320px;
+        max-height:210px;
+    }
+
+    .letter-content{
+        padding:10px;
+    }
+
+    .letter-content h3{
+        font-size:0.9rem;
+    }
+
+    .letter-content p{
+        font-size:0.7rem;
+    }
+
+    .symbols{
+        font-size:18px;
+    }
+
+    .open .letter{
+        transform:
+            translateY(-70px)
+            scale(1);
+    }
+
+    .cursor-glow{
+        display:none;
+    }
+}
