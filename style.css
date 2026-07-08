@@ -867,3 +867,48 @@ translateY(-12px);
 }
 
 }
+
+/* ===========================
+   ENVELOPE EXPLOSION
+=========================== */
+
+.fragment{
+
+    position:fixed;
+
+    width:8px;
+    height:8px;
+
+    background:#00ffff;
+
+    border-radius:2px;
+
+    box-shadow:
+    0 0 10px cyan,
+    0 0 20px cyan;
+
+    pointer-events:none;
+
+    animation:fragmentFly 1s forwards;
+
+}
+
+@keyframes fragmentFly{
+
+    0%{
+        opacity:1;
+        transform:
+        translate(0,0)
+        rotate(0deg)
+        scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        translate(var(--x),var(--y))
+        rotate(720deg)
+        scale(0);
+    }
+
+}
